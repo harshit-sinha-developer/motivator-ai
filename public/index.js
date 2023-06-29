@@ -2,37 +2,30 @@ class ApiService {
   #apiUrl = "http://localhost:3000/api"
 
   async getQuote(prompt, {langCode} = {}) {
-    try {
-      const response = await fetch(`${this.#apiUrl}/getQuote`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({prompt, langCode}),
-      });
-  
-      if (!response.ok) {
-        let err = new Error("HTTP status code: " + response.status)
-        err.response = response
-        err.status = response.status
-        throw err
+    const result = await this.#request('getQuote', {
+      method: 'POST',
+      body: {
+        prompt,
+        langCode
       }
+    });
 
-      const result = await response.json();
-      console.log("Success:", result);
-      return result.data.motivationalResponse;
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    return result.data.motivationalResponse;
   }
 
   async getLanguages() {
+    const result = await this.#request('languages', { method: 'GET' });
+    return result.data.supportedLanguages;
+  }
+
+  async #request(endpoint, {method, body} = {}) {
     try {
-      const response = await fetch(`${this.#apiUrl}/languages`, {
-        method: "GET",
+      const response = await fetch(`${this.#apiUrl}/${endpoint}`, {
+        method,
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify(body),
       });
   
       if (!response.ok) {
@@ -42,9 +35,7 @@ class ApiService {
         throw err
       }
 
-      const result = await response.json();
-      console.log("Success:", result);
-      return result.data.supportedLanguages;
+      return await response.json();
     } catch (error) {
       console.error("Error:", error);
     }
