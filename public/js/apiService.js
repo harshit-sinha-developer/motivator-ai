@@ -1,4 +1,4 @@
-const API_HOST = "http://localhost:3000/api"
+const API_HOST = "/api"
 
 async function request(URL, {method, body} = {}) {
   try {
