@@ -1,11 +1,11 @@
 import { chatCompletion } from '../gpt/interaction.js';
 
 export const SUPPORTED_LANGUAGES = {
-  ENGLISH: 'English (US)',
   HINDI: 'Hindi (Devanagari)',
   CHINESE: 'Simplified Chinese',
   JAPANESE: 'Japanese',
   BANGLA: 'Bangla',
+  ENGLISH: 'English (US)',
 };
 
 const responseFormat = {
