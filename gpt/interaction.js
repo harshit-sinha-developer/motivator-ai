@@ -1,4 +1,4 @@
-import { Configuration, OpenAIApi } from "openai";
+import { Configuration, OpenAIApi } from 'openai';
 import dotenv from 'dotenv';
 
 import logger from '../utils/logger.js';
@@ -10,25 +10,25 @@ const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const MODEL = "gpt-3.5-turbo";
+const MODEL = 'gpt-3.5-turbo';
 const openai = new OpenAIApi(configuration);
 
-export const chatCompletion = async ({systemMessage, userMessage, functions}) => {
+export const chatCompletion = async ({ systemMessage, userMessage, functions }) => {
   logger.info(`Sending request to Open AI with userMessage ${userMessage}`);
   const response = await openai.createChatCompletion({
     model: MODEL,
     messages: [
-      {role: "system", content: systemMessage},
-      {role: "user", content: userMessage}
+      { role: 'system', content: systemMessage },
+      { role: 'user', content: userMessage },
     ],
-    functions: functions,
+    functions,
   });
 
-  if(response.data) {
-    logger.info(`Received response from Open AI`);
+  if (response.data) {
+    logger.info('Received response from Open AI');
   } else {
     logger.error(`Error while fetching response from Open AI ${JSON.stringify(response)}`);
   }
-  
-  return response.data.choices[0].message
-}
+
+  return response.data.choices[0].message;
+};

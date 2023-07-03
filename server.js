@@ -2,10 +2,10 @@ import Koa from 'koa';
 import bodyParser from '@koa/bodyparser';
 import koaLogger from 'koa-logger';
 import bouncer from 'koa-bouncer';
-import serve from "koa-static";
+import serve from 'koa-static';
 import dotenv from 'dotenv';
 
-import {validateRequest} from './middlewares/validate_request.js';
+import { validateRequest } from './middlewares/validate_request.js';
 import logger from './utils/logger.js';
 import apiRoutes from './routes/api.js';
 
