@@ -71,3 +71,5 @@ export const getMotivationalQuote = async (prompt, {langCode} = {langCode: "HIND
 
   return parseMotivationalResponse(response.function_call.arguments)
 }
+
+export const getSupportedLanguages = () => SUPPORTED_LANGUAGES;
