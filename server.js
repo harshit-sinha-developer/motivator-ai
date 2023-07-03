@@ -1,19 +1,18 @@
-import Koa from 'koa'
-import Router from '@koa/router'
-import bodyParser from "@koa/bodyparser"
-import logger from 'koa-logger'
-import bouncer from 'koa-bouncer'
+import Koa from 'koa';
+import Router from '@koa/router';
+import bodyParser from '@koa/bodyparser';
+import koaLogger from 'koa-logger';
+import bouncer from 'koa-bouncer';
 import serve from "koa-static";
 import dotenv from 'dotenv';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
 
-import { getMotivationalQuote, SUPPORTED_LANGUAGES } from './quote_motivation/index.js'
+import {getMotivationalQuote, SUPPORTED_LANGUAGES} from './quote_motivation/index.js';
+import {validateRequest} from './middlewares/validate_request.js';
+import logger from './utils/logger.js';
 
-import {validateRequest} from './server/validate_request.js'
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config();
+
+const SERVER_PORT = process.env.SERVER_PORT || 3000;
 const app = new Koa();
 const router = new Router({prefix: '/api'});
 
@@ -49,10 +48,10 @@ router.redirect('/', '/index.html')
 
 app
   .use(bodyParser())
-  .use(logger())
+  .use(koaLogger())
   .use(serve('public'))
   .use(bouncer.middleware())
   .use(validateRequest)
   .use(router.routes())
   .use(router.allowedMethods())
-  .listen(3000, () => console.log("Listening on port 3000"));
+  .listen(SERVER_PORT, () => logger.info(`Listening on port ${SERVER_PORT}`));
