@@ -1,5 +1,5 @@
 import {
-  LanguageOptions, MotivationComponent, Loader, embedComponent,
+  LanguageMenu, MotivationComponent, Loader, embedComponent,
 } from './uiElements.js';
 import { getQuote, getLanguages } from './apiService.js';
 
@@ -22,7 +22,7 @@ async function main() {
   const supportedLanguages = await getLanguages();
 
   const languageSelectorEle = document.getElementById('language-selector');
-  embedComponent(languageSelectorEle, LanguageOptions({ supportedLanguages }));
+  embedComponent(languageSelectorEle, LanguageMenu({ supportedLanguages }));
 
   document.getElementById('motivate-btn').addEventListener('click', motivateButtonClicked);
 }

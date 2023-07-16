@@ -1,11 +1,15 @@
 const createDOMFragment = (componentString) => document
   .createRange().createContextualFragment(componentString);
 
-export const LanguageOptions = ({ supportedLanguages }) => {
+export const LanguageMenu = ({ supportedLanguages }) => {
   const options = Object.entries(supportedLanguages)
     .map(([langCode, language]) => `<option value="${langCode}">${language}</option>`);
 
-  return createDOMFragment(options.join(' '));
+  return createDOMFragment(`
+    <select class="form-select" aria-label="Language Options">
+      ${options.join(' ')}
+    </select>
+  `);
 };
 
 export const MotivationComponent = ({ motivationResponse }) => createDOMFragment(`
