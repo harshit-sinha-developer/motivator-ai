@@ -1,7 +1,33 @@
 import {
-  LanguageMenu, MotivationComponent, Loader, embedComponent,
+  LanguageMenu, MotivationComponent, LoadingSpinner, embedComponent,
 } from './uiElements.js';
 import { getQuote, getLanguages } from './apiService.js';
+
+/**
+ * 
+ * @returns {string}
+ */
+const getSelectedLanguage = () => document.getElementById('language-selector').value;
+
+/**
+ * 
+ * @param {DocumentFragment} component
+ * @returns {void}
+ */
+const renderQuoteBox = (component) => {
+  const quoteBox = document.getElementById('quoteBox');
+  embedComponent(quoteBox, component);
+}
+
+/**
+ * 
+ * @param {Object.<string, string>} supportedLanguages
+ * @returns {void}
+ */
+const renderLanguageMenu = (supportedLanguages) => {
+  const languageSelectorEle = document.getElementById('language-selector');
+  embedComponent(languageSelectorEle, LanguageMenu({ supportedLanguages }));
+}
 
 const motivateButtonClicked = async () => {
   const prompt = document.getElementById('chat-input').value;
@@ -10,21 +36,21 @@ const motivateButtonClicked = async () => {
     return;
   }
 
-  const containerEle = document.getElementById('quoteBox');
-  embedComponent(containerEle, Loader());
+  const selectedLanguage = getSelectedLanguage();
 
-  const selectedLanguage = document.getElementById('language-selector').value;
+  renderQuoteBox(LoadingSpinner());
   const motivationResponse = await getQuote(prompt, { langCode: selectedLanguage });
-  embedComponent(containerEle, MotivationComponent({ motivationResponse }));
+  renderQuoteBox(MotivationComponent({ motivationResponse }))
 };
+
+const listenMotivateButtonClick = () => {
+  document.getElementById('motivate-btn').addEventListener('click', motivateButtonClicked);
+}
 
 async function main() {
   const supportedLanguages = await getLanguages();
-
-  const languageSelectorEle = document.getElementById('language-selector');
-  embedComponent(languageSelectorEle, LanguageMenu({ supportedLanguages }));
-
-  document.getElementById('motivate-btn').addEventListener('click', motivateButtonClicked);
+  renderLanguageMenu(supportedLanguages);
+  listenMotivateButtonClick();
 }
 
 main();

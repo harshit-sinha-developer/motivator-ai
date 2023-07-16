@@ -1,8 +1,10 @@
 const API_HOST = '/api';
 
-async function request(URL, { method, body } = {}) {
+const getApiEndpoingUrl = (endpoint) => `${API_HOST}/${endpoint}`;
+
+async function request(url, { method, body } = {}) {
   try {
-    const response = await fetch(URL, {
+    const response = await fetch(url, {
       method,
       headers: {
         'Content-Type': 'application/json',
@@ -24,8 +26,14 @@ async function request(URL, { method, body } = {}) {
   }
 }
 
+/**
+ * 
+ * @param {string} prompt 
+ * @param {{langCode: string}} param1 
+ * @returns {Promise<{quote: string, translatedQuotee: string, quotee: string, translatedQuote: string, explanation: string}>}
+ */
 export async function getQuote(prompt, { langCode } = {}) {
-  const result = await request(`${API_HOST}/getQuote`, {
+  const result = await request(getApiEndpoingUrl('getQuote'), {
     method: 'POST',
     body: {
       prompt,
@@ -36,8 +44,12 @@ export async function getQuote(prompt, { langCode } = {}) {
   return result.data.motivationalResponse;
 }
 
+/**
+ * 
+ * @returns {Promise<Object.<string, string>>}
+ */
 export async function getLanguages() {
-  const result = await request(`${API_HOST}/languages`, { method: 'GET' });
+  const result = await request(getApiEndpoingUrl('languages'), { method: 'GET' });
 
   return result.data.supportedLanguages;
 }

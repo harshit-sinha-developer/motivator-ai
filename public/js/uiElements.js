@@ -1,6 +1,11 @@
 const createDOMFragment = (componentString) => document
   .createRange().createContextualFragment(componentString);
 
+/**
+ * 
+ * @param {{supportedLanguages: Object.<string, string>}} param0 
+ * @returns {DocumentFragment}
+ */
 export const LanguageMenu = ({ supportedLanguages }) => {
   const options = Object.entries(supportedLanguages)
     .map(([langCode, language]) => `<option value="${langCode}">${language}</option>`);
@@ -12,6 +17,11 @@ export const LanguageMenu = ({ supportedLanguages }) => {
   `);
 };
 
+/**
+ * 
+ * @param {{motivationResponse: {quote: string, translatedQuotee: string, quotee: string, translatedQuote: string, explanation: string}}} param0 
+ * @returns {DocumentFragment}
+ */
 export const MotivationComponent = ({ motivationResponse }) => createDOMFragment(`
   <div class="row">
     <h5>Someone once said</h5>
@@ -41,7 +51,11 @@ export const MotivationComponent = ({ motivationResponse }) => createDOMFragment
   </div>
 `);
 
-export const Loader = () => createDOMFragment(`
+/**
+ * 
+ * @returns {DocumentFragment}
+ */
+export const LoadingSpinner = () => createDOMFragment(`
   <div class="d-flex justify-content-center">
     <div class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>
