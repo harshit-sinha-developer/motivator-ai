@@ -29,6 +29,11 @@ const renderLanguageMenu = (supportedLanguages) => {
   embedComponent(languageSelectorEle, LanguageMenu({ supportedLanguages }));
 }
 
+const initializeLanguageMenu = async () => {
+  const supportedLanguages = await getLanguages();
+  renderLanguageMenu(supportedLanguages);
+}
+
 const motivateButtonClicked = async () => {
   const prompt = document.getElementById('chat-input').value;
 
@@ -43,14 +48,13 @@ const motivateButtonClicked = async () => {
   renderQuoteBox(MotivationComponent({ motivationResponse }))
 };
 
-const listenMotivateButtonClick = () => {
+const listenMotivateButtonClicked = () => {
   document.getElementById('motivate-btn').addEventListener('click', motivateButtonClicked);
 }
 
 async function main() {
-  const supportedLanguages = await getLanguages();
-  renderLanguageMenu(supportedLanguages);
-  listenMotivateButtonClick();
+  await initializeLanguageMenu();
+  listenMotivateButtonClicked();
 }
 
 main();
