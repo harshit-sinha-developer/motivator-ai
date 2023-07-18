@@ -1,5 +1,5 @@
 import {
-  LanguageMenu, MotivationComponent, LoadingSpinner, embedComponent,
+  LanguageMenu, MotivationComponent, LoadingSpinner, embedHTML,
 } from './uiElements.js';
 import { getQuote, getLanguages } from './apiService.js';
 
@@ -11,12 +11,12 @@ const getSelectedLanguage = () => document.getElementById('language-selector').v
 
 /**
  * 
- * @param {DocumentFragment} childComponent
+ * @param {string} innerHTML
  * @returns {void}
  */
-const renderQuoteBox = (childComponent) => {
+const renderQuoteBox = (innerHTML) => {
   const quoteBox = document.getElementById('quoteBox');
-  embedComponent(quoteBox, childComponent);
+  embedHTML(quoteBox, innerHTML);
 }
 
 /**
@@ -26,7 +26,7 @@ const renderQuoteBox = (childComponent) => {
  */
 const renderLanguageMenu = (supportedLanguages) => {
   const languageSelectorEle = document.getElementById('language-selector');
-  embedComponent(languageSelectorEle, LanguageMenu({ supportedLanguages }));
+  embedHTML(languageSelectorEle, LanguageMenu({ supportedLanguages }));
 }
 
 const initializeLanguageMenu = async () => {
