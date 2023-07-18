@@ -11,12 +11,12 @@ const getSelectedLanguage = () => document.getElementById('language-selector').v
 
 /**
  * 
- * @param {DocumentFragment} component
+ * @param {DocumentFragment} childComponent
  * @returns {void}
  */
-const renderQuoteBox = (component) => {
+const renderQuoteBox = (childComponent) => {
   const quoteBox = document.getElementById('quoteBox');
-  embedComponent(quoteBox, component);
+  embedComponent(quoteBox, childComponent);
 }
 
 /**
