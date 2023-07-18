@@ -1,6 +1,6 @@
 import {
-  LanguageMenu, MotivationComponent, LoadingSpinner, embedHTML,
-} from './uiElements.js';
+  LanguageMenu, MotivationQuoteBox, LoadingSpinner, embedHTML,
+} from './ui-elements/index.js';
 import { getQuote, getLanguages } from './apiService.js';
 
 /**
@@ -45,7 +45,7 @@ const motivateButtonClicked = async () => {
 
   renderQuoteBox(LoadingSpinner());
   const motivationResponse = await getQuote(prompt, { langCode: selectedLanguage });
-  renderQuoteBox(MotivationComponent({ motivationResponse }))
+  renderQuoteBox(MotivationQuoteBox({ motivationResponse }))
 };
 
 const listenMotivateButtonClicked = () => {
