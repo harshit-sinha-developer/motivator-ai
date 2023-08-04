@@ -2,21 +2,7 @@
   <div class="container text-center">
     <div class="vstack gap-3">
       <div class="p-2">
-        <label for="chat-input" class="form-label">What's on your mind ?</label>
-        <div class="input-group">
-          <textarea name="prompt" class="form-control" id="chat-input" aria-label="With textarea"></textarea>
-          <button 
-            type="submit" 
-            class="btn btn-primary" 
-            id="motivate-btn" 
-            hx-include="#language-selector select[name='langCode'], [name='prompt']" 
-            hx-post="/views/motivation_quote"
-            hx-target="#quoteBox"
-            hx-indicator="#quoteBox-container"
-          >
-            Motivate me !
-          </button>
-        </div>
+        <%- include('quote_prompt') %>
       </div>
       <div class="p-2">
         <div id="quoteBox-container">
@@ -30,4 +16,3 @@
     </div>
   </div>
 </main>
-
