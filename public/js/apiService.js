@@ -27,10 +27,16 @@ async function request(url, { method, body } = {}) {
 }
 
 /**
- * 
- * @param {string} prompt 
- * @param {{langCode: string}} param1 
- * @returns {Promise<{quote: string, translatedQuotee: string, quotee: string, translatedQuote: string, explanation: string}>}
+ *
+ * @param {string} prompt
+ * @param {{langCode: string}} param1
+ * @returns {Promise<{
+ *  quote: string,
+ *  translatedQuotee: string,
+ *  quotee: string,
+ *  translatedQuote: string,
+ *  explanation: string
+ * }>}
  */
 export async function getQuote(prompt, { langCode } = {}) {
   const result = await request(getApiEndpoingUrl('getQuote'), {
@@ -45,7 +51,7 @@ export async function getQuote(prompt, { langCode } = {}) {
 }
 
 /**
- * 
+ *
  * @returns {Promise<Object.<string, string>>}
  */
 export async function getLanguages() {

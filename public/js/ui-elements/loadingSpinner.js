@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * @returns {string}
  */
 const LoadingSpinner = () => `

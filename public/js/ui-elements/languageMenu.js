@@ -1,6 +1,6 @@
 /**
- * 
- * @param {{supportedLanguages: Object.<string, string>}} param0 
+ *
+ * @param {{supportedLanguages: Object.<string, string>}} param0
  * @returns {string}
  */
 const LanguageMenu = ({ supportedLanguages }) => {
