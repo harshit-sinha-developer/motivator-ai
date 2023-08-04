@@ -1,6 +1,6 @@
 import { getMotivationalQuote, getSupportedLanguages } from '../quote_motivation/index.js';
 
-const validateGetQuote = (ctx) => {
+export const validateGetQuote = (ctx) => {
   ctx
     .validateBody('prompt')
     .required('Prompt required')
@@ -20,13 +20,13 @@ export const getQuote = async (ctx, next) => {
   const { prompt, langCode } = validateGetQuote(ctx);
 
   const motivationalResponse = await getMotivationalQuote(prompt, { langCode });
-  ctx.body = { data: { motivationalResponse } };
+  ctx.state.motivationResponse = motivationalResponse;
 
   return next();
 };
 
 export const getLanguages = async (ctx, next) => {
-  ctx.body = { data: { supportedLanguages: getSupportedLanguages() } };
+  ctx.state.supportedLanguages = getSupportedLanguages();
 
   return next();
 };

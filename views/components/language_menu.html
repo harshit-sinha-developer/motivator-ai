@@ -1,0 +1,5 @@
+<select class="form-select" aria-label="Language Options" name="langCode">
+  <% Object.entries(supportedLanguages).map(([langCode, language]) => {%>
+    <option value="<%= langCode %>"><%= language %></option>
+  <% })%>
+</select>

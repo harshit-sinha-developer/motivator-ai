@@ -1,0 +1,7 @@
+.htmx-request > #quoteBox {
+  display: none;
+}
+
+#quoteBox {
+  display: inherit;
+}

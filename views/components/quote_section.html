@@ -1,0 +1,26 @@
+<div class="row">
+  <%- include('quote_box', {
+      quoteResponse: {
+        title: 'Someone once said', 
+        quote: motivationResponse.quote, 
+        quotee: motivationResponse.quotee,
+        quoteeTitle: motivationResponse.translatedQuotee
+      }
+    })
+  %>
+</div>
+<div class="row">
+  <%- include('quote_box', {
+    quoteResponse: {
+      title: 'Literal Translation',
+      quote: motivationResponse.translatedQuote,
+      quoteeTitle: motivationResponse.translatedQuotee,
+      quotee: motivationResponse.translatedQuotee,
+    }
+  })
+%>
+</div>
+<div class="row">
+  <h5>Meaning</h5>
+  <p><%= motivationResponse.explanation %></p>
+</div>

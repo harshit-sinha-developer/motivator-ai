@@ -2,10 +2,23 @@ import Router from '@koa/router';
 
 import { getQuote, getLanguages } from '../middlewares/motivational_quotes.js';
 
-const router = new Router({ prefix: '/api' });
+const router = new Router();
 
-router.post('/getQuote', getQuote);
-router.get('/languages', getLanguages);
-router.redirect('/', '/index.html');
+const generateResponseFromState = (state, responseKey) => {
+  const response = { data: {} };
+  response.data[responseKey] = state[responseKey];
+
+  return response;
+};
+
+router.post('/getQuote', getQuote, (ctx, next) => {
+  ctx.body = generateResponseFromState(ctx.state, 'motivationResponse');
+  return next();
+});
+
+router.get('/languages', getLanguages, (ctx, next) => {
+  ctx.body = generateResponseFromState(ctx.state, 'supportedLanguages');
+  return next();
+});
 
 export default router;

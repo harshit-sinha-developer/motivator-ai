@@ -1,0 +1,33 @@
+<main>
+  <div class="container text-center">
+    <div class="vstack gap-3">
+      <div class="p-2">
+        <label for="chat-input" class="form-label">What's on your mind ?</label>
+        <div class="input-group">
+          <textarea name="prompt" class="form-control" id="chat-input" aria-label="With textarea"></textarea>
+          <button 
+            type="submit" 
+            class="btn btn-primary" 
+            id="motivate-btn" 
+            hx-include="#language-selector select[name='langCode'], [name='prompt']" 
+            hx-post="/views/motivation_quote"
+            hx-target="#quoteBox"
+            hx-indicator="#quoteBox-container"
+          >
+            Motivate me !
+          </button>
+        </div>
+      </div>
+      <div class="p-2">
+        <div id="quoteBox-container">
+          <div id="quoteBox-loader" class="htmx-indicator">
+            <%- include('loader') %>
+          </div>
+          <div class="container text-center my-6" id="quoteBox">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
