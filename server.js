@@ -24,12 +24,14 @@ render(app, {
   layout: 'template',
   viewExt: 'html',
   cache: false,
-  debug: true,
+  debug: false,
 });
 
 app
   .use(bodyParser({ urlencoded: true }))
-  .use(koaLogger())
+  .use(koaLogger((str, args) => {
+    logger.info(str, args);
+  }))
   .use(serve('public'))
   .use(bouncer.middleware())
   .use(validateRequest)
