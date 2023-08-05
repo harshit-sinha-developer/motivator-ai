@@ -25,6 +25,6 @@ export const validateViewRequest = async (ctx, next) => {
       await ctx.render('error', { errorMessage: err.message, errorLevel: 'WARNING' });
       return;
     }
-    await ctx.render('error', { errorMessage: err.message, errorLevel: 'DANGER' });
+    await ctx.render('error', { errorMessage: err.message, errorLevel: 'ERROR' });
   }
 };
