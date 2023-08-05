@@ -8,7 +8,6 @@ import render from 'koa-ejs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import { validateRequest } from './middlewares/validate_request.js';
 import logger from './utils/logger.js';
 import rootRoutes from './routes/index.js';
 
@@ -34,7 +33,6 @@ app
   }))
   .use(serve('public'))
   .use(bouncer.middleware())
-  .use(validateRequest)
   .use(rootRoutes.routes())
   .use(rootRoutes.allowedMethods())
   .listen(SERVER_PORT, () => logger.info(`Listening on port ${SERVER_PORT}`));

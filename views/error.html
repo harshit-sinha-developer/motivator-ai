@@ -1,0 +1,16 @@
+<% 
+  const errorClass = (() => {
+    if(errorLevel == 'INFO') {
+      return "alert-primary"
+    }
+    if(errorLevel == 'ERROR') {
+      return "alert-danger"
+    }
+    if(errorLevel == 'WARNING') {
+      return "alert-warning"
+    }
+  })();
+%>
+<div class="alert <%= errorClass %>" role="alert">
+  <%= errorMessage %>
+</div>

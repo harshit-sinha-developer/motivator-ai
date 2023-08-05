@@ -5,7 +5,8 @@ export const validateGetQuote = (ctx) => {
     .validateBody('prompt')
     .required('Prompt required')
     .isString()
-    .trim();
+    .trim()
+    .isLength(1, 280, 'Prompt length should be between 1 to 280 characters.');
 
   ctx
     .validateBody('langCode')

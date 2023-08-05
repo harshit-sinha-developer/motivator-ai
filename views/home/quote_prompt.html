@@ -1,9 +1,9 @@
-<label for="chat-input" class="form-label">What's on your mind ?</label>
-<div class="input-group">
-  <textarea name="prompt" class="form-control" id="chat-input" aria-label="With textarea"></textarea>
-  <button type="submit" class="btn btn-primary" id="motivate-btn"
-    hx-include="#language-selector select[name='langCode'], [name='prompt']" hx-post="/views/getQuote"
-    hx-target="#quoteBox" hx-indicator="#quoteBox-container">
-    Motivate me !
-  </button>
-</div>
+<form class="was-validated">
+  <label for="chat-input" class="form-label">What's on your mind ?</label>
+  <div class="input-group">
+    <textarea name="prompt" class="form-control is-invalid" id="chat-input" aria-label="With textarea" required></textarea>
+    <input type="submit" class="btn btn-primary" id="motivate-btn"
+      hx-include="#language-selector select[name='langCode'], [name='prompt']" hx-post="/views/getQuote"
+      hx-target="#quoteBox" hx-indicator="#quoteBox-container" value="Motivate me !" />
+  </div>
+</form>

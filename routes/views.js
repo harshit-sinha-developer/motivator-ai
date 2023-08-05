@@ -1,7 +1,10 @@
 import Router from '@koa/router';
 import { getQuote, getLanguages } from '../middlewares/motivational_quotes.js';
+import { validateViewRequest } from '../middlewares/validate_request.js';
 
 const router = new Router();
+
+router.use(validateViewRequest);
 
 router.post('/getQuote', getQuote, async (ctx) => {
   await ctx.render('components/quote_section', { motivationResponse: ctx.state.motivationResponse });
